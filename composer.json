@@ -8,6 +8,11 @@
       "email": "admin@msgru.com"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "Msgframework\\Lib\\Language\\": ""
+    }
+  },
   "require": {
     "php": ">=7.4",
     "joomla/utilities": "^2.0",
