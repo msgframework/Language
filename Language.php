@@ -899,7 +899,7 @@ class Language
     /**
      * @throws LanguagePropertyException
      */
-    public function __get($name, $default = null)
+    public function __get($name)
     {
         $method = "get" . ucfirst($name);
 
@@ -907,7 +907,7 @@ class Language
             throw new LanguagePropertyException(sprintf('Property %s can not be read from this Language', $name));
         }
 
-        return $this->$method($default);
+        return $this->$method();
     }
 
     /**
