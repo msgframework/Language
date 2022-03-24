@@ -10,7 +10,6 @@
   ],
   "require": {
     "php": ">=7.4",
-    "msgframework/registry": "^1.0",
     "joomla/utilities": "^2.0",
     "joomla/string": "^1.4",
     "ext-json": "*"

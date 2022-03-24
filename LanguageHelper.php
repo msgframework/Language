@@ -239,7 +239,7 @@ class LanguageHelper
 	}
 
     /**
-     * Parse XML file for language information.
+     * Parse json file for language information.
      *
      * @param string $path  Path to the XML files.
      *
