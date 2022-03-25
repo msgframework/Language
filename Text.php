@@ -36,6 +36,7 @@ class Text
             return $string;
         }
 
+        /** @var Language $lang */
         $lang = \Cms::getApplication()->getLanguage();
 
         if ($script)
@@ -68,6 +69,7 @@ class Text
             return false;
         }
 
+        /** @var Language $lang */
         $lang = \Cms::getApplication()->getLanguage();
         $string_parts = explode(',', $string);
 
@@ -128,7 +130,9 @@ class Text
      */
     public static function alt(string $string, string $alt, bool $jsSafe = false, bool $interpretBackSlashes = true, bool $script = false): string
     {
-        if (\Cms::getApplication()->getLanguage()->hasKey($string . '_' . $alt))
+        /** @var Language $lang */
+        $lang = \Cms::getApplication()->getLanguage();
+        if ($lang->hasKey($string . '_' . $alt))
         {
             $string .= '_' . $alt;
         }
@@ -153,6 +157,7 @@ class Text
      */
     public static function plural($string, $n): string
     {
+        /** @var Language $lang */
         $lang = \Cms::getApplication()->getLanguage();
         $args = func_get_args();
         $count = count($args);
@@ -194,7 +199,7 @@ class Text
 
         if (is_array($args[$count - 1]))
         {
-            $args[0] = $lang->get(
+            $args[0] = $lang->_(
                 $key, array_key_exists('jsSafe', $args[$count - 1]) ? $args[$count - 1]['jsSafe'] : false,
                 array_key_exists('interpretBackSlashes', $args[$count - 1]) ? $args[$count - 1]['interpretBackSlashes'] : true
             );
@@ -208,7 +213,7 @@ class Text
         }
         else
         {
-            $args[0] = $lang->get($key);
+            $args[0] = $lang->_($key);
         }
 
         return call_user_func_array('sprintf', $args);
@@ -237,6 +242,7 @@ class Text
      */
     public static function sprintf(string $string): string
     {
+        /** @var Language $lang */
         $lang = \Cms::getApplication()->getLanguage();
         $args = func_get_args();
         $count = count($args);
@@ -248,7 +254,7 @@ class Text
 
         if (is_array($args[$count - 1]))
         {
-            $args[0] = $lang->get(
+            $args[0] = $lang->_(
                 $string, array_key_exists('jsSafe', $args[$count - 1]) ? $args[$count - 1]['jsSafe'] : false,
                 array_key_exists('interpretBackSlashes', $args[$count - 1]) ? $args[$count - 1]['interpretBackSlashes'] : true
             );
@@ -262,7 +268,7 @@ class Text
         }
         else
         {
-            $args[0] = $lang->get($string);
+            $args[0] = $lang->_($string);
         }
 
         // Replace custom named placeholders with sprintf style placeholders
@@ -284,6 +290,7 @@ class Text
      */
     public static function printf(string $string)
     {
+        /** @var Language $lang */
         $lang = \Cms::getApplication()->getLanguage();
         $args = func_get_args();
         $count = count($args);
@@ -295,14 +302,14 @@ class Text
 
         if (is_array($args[$count - 1]))
         {
-            $args[0] = $lang->get(
+            $args[0] = $lang->_(
                 $string, array_key_exists('jsSafe', $args[$count - 1]) ? $args[$count - 1]['jsSafe'] : false,
                 array_key_exists('interpretBackSlashes', $args[$count - 1]) ? $args[$count - 1]['interpretBackSlashes'] : true
             );
         }
         else
         {
-            $args[0] = $lang->get($string);
+            $args[0] = $lang->_($string);
         }
 
         return call_user_func_array('printf', $args);
